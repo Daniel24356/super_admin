@@ -1,86 +1,84 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import logo from '../assets/logo.png'
+import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-    return (
-        <div className="w-full min-h-screen bg-[#FCF6F3] relative">
-            <header className="w-full bg-white shadow-sm h-[75px] flex items-center px-10">
-                <img
-                    src={logo}
-                    alt="ABEG EMS"
-                    className="h-[63px] w-[96px] object-cover"
-                />
-            </header>
-
-            {/* Background faint pattern */}
-            {/* <div className="absolute inset-0 pointer-events-none opacity-10">
+  return (
+    <div className="min-h-screen bg-[#FCF6F3] flex flex-col">
+      {/* Header */}
+      <header className="w-full bg-white shadow-sm h-[75px] flex items-center px-6 sm:px-10">
         <img
-          src="/pattern.png"
-          alt="background pattern"
-          className="w-full h-full object-cover"
+          src={logo}
+          alt="ABEG EMS"
+          className="h-[58px] w-auto object-contain"
         />
-      </div> */}
+      </header>
 
-            {/* Login Card */}
-            <div className="w-full h-[446px] flex justify-center mt-10 px-4">
-                <div className="bg-white w-full max-w-md rounded-2xl shadow-md p-10 z-10">
-                    <h2 className="text-center text-[30px] text-[rgba(19, 23, 14, 1)] font-semibold mb-8">
-                        Admin Login
-                    </h2>
+      {/* Main Content - Perfect Center */}
+      <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+        <div className="w-full max-w-md">
+          {/* Login Card */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-10">
+            <h2 className="text-center text-2xl sm:text-3xl font-semibold text-gray-900 mb-8">
+              Admin Login
+            </h2>
 
-                    {/* Email */}
-                    <label className="text-sm font-medium block mb-1">
-                        Admin Email Address
-                    </label>
-                    <input
-                        type="email"
-                        placeholder="Enter email address"
-                        className="w-full border rounded-lg px-4 py-2 mb-5 outline-none focus:ring-1 focus:ring-orange-400"
-                    />
+            {/* Email */}
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Admin Email Address
+            </label>
+            <input
+              type="email"
+              placeholder="Enter email address"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition mb-5"
+            />
 
-                    {/* Password */}
-                    <label className="text-sm font-medium block mb-1">
-                        Password
-                    </label>
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            className="w-full border rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-orange-400"
-                            defaultValue="password"
-                        />
-
-                        <button
-                            onClick={() => setShowPassword(!showPassword)}
-                            type="button"
-                            className="absolute right-3 top-2.5 text-gray-600"
-                        >
-                            {showPassword ? (
-                                <EyeOff size={20} />
-                            ) : (
-                                <Eye size={20} />
-                            )}
-                        </button>
-                    </div>
-
-                    <div className="flex justify-end mt-1 mb-6">
-                        <a href="#" className="text-sm text-orange-500 hover:underline">
-                            Forgot Password
-                        </a>
-                    </div>
-
-                    {/* Login Button */}
-                    <Link to="admin">
-                        <button className="w-full bg-orange-500 text-white py-3 rounded-full text-center font-medium hover:bg-orange-600 transition">
-                            Login
-                        </button>
-                    </Link>
-
-                </div>
+            {/* Password */}
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <div className="relative mb-3">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
             </div>
+
+            {/* Forgot Password */}
+            <div className="text-right mb-6">
+              <a
+                href="#"
+                className="text-sm text-orange-500 hover:text-orange-600 font-medium transition"
+              >
+                Forgot Password?
+              </a>
+            </div>
+
+            {/* Login Button */}
+            <Link to="/admin">
+              <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3.5 rounded-full transition duration-200 transform hover:scale-[1.02] active:scale-100">
+                Login
+              </button>
+            </Link>
+          </div>
+
+          {/* Optional Footer */}
+          <p className="text-center text-xs text-gray-500 mt-8">
+            © 2025 ABEG EMS. All rights reserved.
+          </p>
         </div>
-    );
+      </main>
+    </div>
+  );
 }
