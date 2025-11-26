@@ -73,10 +73,6 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          {/* Optional Footer */}
-          <p className="text-center text-xs text-gray-500 mt-8">
-            © 2025 ABEG EMS. All rights reserved.
-          </p>
         </div>
       </main>
     </div>

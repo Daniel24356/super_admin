@@ -33,16 +33,16 @@ const UsersTable = () => {
       statusColor: "bg-[rgb(253,245,234)] text-yellow-600 border border-yellow-600",
     },
   ];
-   
+
   return (
     <div className="px-6 py-6 mt-5 bg-white rounded-2xl shadow-sm border border-gray-200">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      {/* Header - becomes vertical on mobile */}
+      <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between mb-6">
         <h2 className="text-lg font-semibold">All Users</h2>
 
-        <div className="flex items-center gap-4">
-          {/* Search */}
-          <div className="w-[320px] bg-white border rounded-lg px-4 py-2 flex items-center gap-2 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Search - full width on mobile */}
+          <div className="w-full sm:w-[320px] bg-white border rounded-lg px-4 py-2 flex items-center gap-2 shadow-sm">
             <Search className="w-4 h-4 text-gray-400" />
             <input
               type="text"
@@ -51,21 +51,21 @@ const UsersTable = () => {
             />
           </div>
 
-          {/* Date Range */}
-          <button className="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm bg-white shadow-sm">
-            Date Range <ChevronDown className="w-4 h-4" />
-          </button>
-
-          {/* Filters */}
-          <button className="px-4 py-2 border rounded-lg text-sm bg-white shadow-sm">
-            Filters
-          </button>
+          {/* Buttons - stack on small screens */}
+          <div className="flex gap-3">
+            <button className="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm bg-white shadow-sm whitespace-nowrap">
+              Date Range <ChevronDown className="w-4 h-4" />
+            </button>
+            <button className="px-4 py-2 border rounded-lg text-sm bg-white shadow-sm whitespace-nowrap">
+              Filters
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Table */}
+      {/* Table - now truly responsive */}
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full text-sm min-w-[800px]"> {/* ← This is the only magic line */}
           <thead>
             <tr className="bg-[rgb(254,242,237)] text-left text-gray-700">
               <th className="py-3 px-4 font-medium">Date Added</th>
@@ -87,33 +87,27 @@ const UsersTable = () => {
                 <td className="px-4 py-4 text-[14px] text-gray-700">{user.admin}</td>
                 <td className="px-4 py-4 text-[14px] text-gray-700">{user.type}</td>
                 <td className="px-4 py-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${user.statusColor}`}
-                  >
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${user.statusColor}`}>
                     {user.status}
                   </span>
                 </td>
                 <td className="px-4 py-4 relative">
                   <button
-                    onClick={() =>
-                      setOpenMenu(openMenu === index ? null : index)
-                    }
+                    onClick={() => setOpenMenu(openMenu === index ? null : index)}
                     className="p-2 rounded-full hover:bg-gray-100"
                   >
                     <MoreVertical className="w-5 h-5 text-gray-700" />
                   </button>
 
-                  {/* Dropdown Menu */}
+                  {/* Dropdown - unchanged */}
                   {openMenu === index && (
                     <div className="absolute right-10 top-6 w-44 bg-white shadow-lg rounded-xl border z-20 py-2">
                       <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
                         <Eye className="w-4 h-4 text-gray-600" /> View Details
                       </button>
-
                       <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
                         <Ban className="w-4 h-4 text-yellow-600" /> Suspend User
                       </button>
-
                       <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600">
                         <UserMinus className="w-4 h-4 text-red-600" /> Remove User
                       </button>

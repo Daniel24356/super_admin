@@ -81,9 +81,9 @@ export const LiveTrackingMap = () => {
         </div>
 
         {/* Floating Button */}
-        <button className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-orange-500 shadow-lg flex items-center justify-center hover:bg-orange-600 transition z-10">
+        {/* <button className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-orange-500 shadow-lg flex items-center justify-center hover:bg-orange-600 transition z-10">
           <MapPin className="w-6 h-6 text-white" />
-        </button>
+        </button> */}
       </div>
 
       <div className="w-full text-center mt-3">
