@@ -1,5 +1,4 @@
-import React from "react";
-import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { MapPin } from "lucide-react";
 
 const containerStyle = {
