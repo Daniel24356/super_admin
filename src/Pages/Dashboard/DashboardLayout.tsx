@@ -1,22 +1,31 @@
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
-import DashboardMain from "../../Components/DashboardMain";
+import Header from "../../Components/Header";
 
-const DashboardLayout = () => {
+export default function DashboardLayout() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
-    <div className="w-full h-screen flex bg-[#F5F2F0] overflow-hidden">
+    <div className="w-fit flex min-h-screen bg-gray-100">
 
-      {/* Sidebar (Left) */}
-      <div className="w-[255px] h-full bg-white shadow-md">
-        <Sidebar />
+      {/* Sidebar */}
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
+      />
+
+      {/* Main Area */}
+      <div className="flex-1 flex flex-col">
+
+        <Header onMenuClick={() => setIsSidebarOpen(true)} />
+
+        {/* Page Content */}
+        <main className="p-6">
+          <Outlet />     {/* <-- THIS SHOWS DashboardMain */}
+        </main>
+
       </div>
-
-      {/* Main Section (Right) */}
-      <div className="flex-1 h-full overflow-y-auto">
-        <DashboardMain />
-      </div>
-
     </div>
   );
-};
-
-export default DashboardLayout;
+}
