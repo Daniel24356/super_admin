@@ -23,7 +23,7 @@ export default function DashboardLayout() {
       {/* Right side = Header + Main content */}
       <div className="md:ml-64">
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="p-6">
+        <main className="p-2 sm:p-4 md:p-6">
           <Outlet />
         </main>
       </div>
