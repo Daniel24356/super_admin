@@ -7,24 +7,25 @@ export default function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="w-fit flex min-h-screen bg-gray-100">
-
-      {/* Sidebar */}
-      <Sidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
+    <div
+      className="
+        min-h-screen 
+        bg-gray-100 
+      "
+    >
+      {/* Sidebar (fixed on mobile but static on desktop) */}
+          <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
+     
 
-      {/* Main Area */}
-      <div className="flex-1 flex flex-col">
-
+      {/* Right side = Header + Main content */}
+      <div className="md:ml-64">
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
-
-        {/* Page Content */}
         <main className="p-6">
-          <Outlet />     {/* <-- THIS SHOWS DashboardMain */}
+          <Outlet />
         </main>
-
       </div>
     </div>
   );

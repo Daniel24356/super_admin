@@ -21,9 +21,10 @@ const DashboardMain = () => {
         <div
           className="
             grid
-            grid-cols-2        /* MOBILE = 2 */
+            grid-cols-1        /* MOBILE = 2 */
             sm:grid-cols-2     /* SMALL = 2 */
-            lg:grid-cols-4     /* LARGE = 4 */
+            lg:grid-cols-3     /* LARGE = 4 */
+            xl:grid-cols-4
             gap-6
           "
         >
