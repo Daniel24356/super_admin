@@ -12,6 +12,8 @@ import {
     X
 } from "lucide-react";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+import { Line } from "recharts";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -58,18 +60,38 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     />
 
                     <nav className="flex flex-col space-y-1 text-sm font-medium">
-                        <div className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm text-orange-500">
+                        <Link to="/admin">
+                           <div className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm text-orange-500">
                             <LayoutGrid size={20} />
                             <span>Overview</span>
                         </div>
-
-                        <MenuItem icon={<Truck size={20} />} label="Ambulance Operators" />
-                        <MenuItem icon={<Building2 size={20} />} label="Hospitals" />
-                        <MenuItem icon={<MapPin size={20} />} label="Monitoring" />
+                        </Link>
+                       
+                     
+                     <Link to="/admin/operators">
+                      <MenuItem icon={<Truck size={20} />} label="Ambulance Operators" />
+                     </Link>
+                      <Link to="/admin/hospitals">
+                      <MenuItem icon={<Building2 size={20} />} label="Hospitals" />
+                      </Link> 
+                      <Link to="/admin/monitoring">
+                         <MenuItem icon={<MapPin size={20} />} label="Monitoring" />
+                      </Link>  
+                      <Link to="/admin/transactions">
                         <MenuItem icon={<CreditCard size={20} />} label="Transactions" />
-                        <MenuItem icon={<FileText size={20} />} label="Reports" />
-                        <MenuItem icon={<Headphones size={20} />} label="Support" />
+                      </Link>
+                        <Link to="/admin/reports">
+                         <MenuItem icon={<FileText size={20} />} label="Reports" />
+                        </Link>
+                       
+                        <Link to="/admin/support">
+                           <MenuItem icon={<Headphones size={20} />} label="Support" />
+                        </Link>
+                       
+                        <Link to="/admin/settings">
                         <MenuItem icon={<Settings size={20} />} label="Settings" />
+                        </Link>
+                        
                     </nav>
                 </div>
 
