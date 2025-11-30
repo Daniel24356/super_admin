@@ -11,6 +11,7 @@ import SettingsPage from './Pages/Dashboard/SettingsPage';
 import SupportPage from './Pages/Dashboard/SupportsPage';
 import ReportsPage from './Pages/Dashboard/ReportsPage';
 import MonitoringPage from './Pages/Dashboard/MonitoringPage';
+import Notifications from './Pages/Dashboard/Notifications';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="reports" element={<ReportsPage/>} />
           <Route path="support" element={<SupportPage/>} />
           <Route path="settings" element={<SettingsPage/>} />
+          <Route path="notifications" element={<Notifications/>} />
         </Route>
 
       </Routes>

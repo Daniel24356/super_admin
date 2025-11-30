@@ -5,6 +5,7 @@ import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import { Eye, UserMinus, Ban} from "lucide-react";
 
 interface Driver {
   name: string;
@@ -32,27 +33,30 @@ export default function AmbulanceOperators() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* PAGE HEADER */}
-      <h1 className="text-2xl font-semibold">Ambulance Operators</h1>
+      <h1 className="text-2xl font-semibold ">Ambulance Operators</h1>
       <p className="text-gray-600 mb-6">
         View and manage all Ambulance Operators here
       </p>
 
       {/* TABS */}
-      <div className="flex gap-3 mb-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-md border text-sm ${
-              activeTab === tab
-                ? "bg-orange-100 border-orange-400 text-orange-600"
-                : "bg-white border-gray-300 text-gray-600"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+     <div className="mb-6">
+  <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-row sm:items-center sm:gap-3">
+    {tabs.map((tab) => (
+      <button
+        key={tab}
+        onClick={() => setActiveTab(tab)}
+        className={`px-4 py-2 rounded-md border text-sm w-full sm:w-auto
+          ${activeTab === tab
+            ? "bg-orange-100 border-orange-400 text-orange-600"
+            : "bg-white border-gray-300 text-gray-600"
+          }`}
+      >
+        {tab}
+      </button>
+    ))}
+  </div>
+</div>
+
 
       {/* TABLE CARD */}
       <div className="bg-white p-6 rounded-xl shadow-sm border">
@@ -123,15 +127,18 @@ export default function AmbulanceOperators() {
                     </button>
 
                     {openMenuIndex === index && (
-                      <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
-                        <button className="w-full text-left px-4 py-2 hover:bg-gray-100 flex gap-2 items-center">
-                          ⏸ Suspend User
-                        </button>
-                        <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600 flex gap-2 items-center">
-                          🗑 Remove User
-                        </button>
-                      </div>
-                    )}
+                    <div className="absolute right-12 top-6 w-44 bg-white shadow-lg rounded-xl border z-20 py-2">
+                      <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
+                        <Eye className="w-4 h-4 text-gray-600" /> View Details
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
+                        <Ban className="w-4 h-4 text-yellow-600" /> Suspend User
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600">
+                        <UserMinus className="w-4 h-4 text-red-600" /> Remove User
+                      </button>
+                    </div>
+                  )}
                   </td>
                 </tr>
               ))}
