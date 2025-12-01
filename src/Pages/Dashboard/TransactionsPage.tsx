@@ -1,5 +1,5 @@
 import { Building2, Users2, Wallet, Activity } from "lucide-react";
-import UsersTable from "../../Components/UserTable";
+import TransactionsTable from "../../Components/TransactionTable";
 
 const TransactionsPage = () => {
     return(
@@ -67,7 +67,7 @@ const TransactionsPage = () => {
         <div className="bg-white p-6 rounded-2xl shadow-sm mt-6 overflow-hidden">
           <h3 className="text-lg font-semibold mb-4">Recent Users</h3>
           <div className="overflow-x-auto">
-            <UsersTable />
+            <TransactionsTable/>
           </div>
         </div>
       </div>
