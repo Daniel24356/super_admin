@@ -15,15 +15,15 @@ const togglesInitial = {
 export default function SettingsPage() {
   const [toggles, setToggles] = useState(togglesInitial);
   const [activeTab, setActiveTab] = useState<
-    "notifications" | "security" | "transaction"
-  >("notifications");
+    "Notifications" | "Security" | "Transaction"
+  >("Notifications");
 
   const handleToggle = (key: keyof typeof togglesInitial) => {
     setToggles({ ...toggles, [key]: !toggles[key] });
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f7f5] p-10 text-gray-800">
+    <div className="min-h-screen p-3 text-gray-800">
 
       {/* ---------------- HEADER ---------------- */}
       <div className="flex justify-between items-center mb-10">
@@ -39,33 +39,34 @@ export default function SettingsPage() {
         </button>
       </div>
 
-      {/* ---------------- TABS ---------------- */}
-      <div className="flex space-x-6 border-b pb-2 mb-6">
-        <TabButton
-          label="Notifications"
-          active={activeTab === "notifications"}
-          onClick={() => setActiveTab("notifications")}
-        />
-        <TabButton
-          label="Security"
-          active={activeTab === "security"}
-          onClick={() => setActiveTab("security")}
-        />
-        <TabButton
-          label="Transaction"
-          active={activeTab === "transaction"}
-          onClick={() => setActiveTab("transaction")}
-        />
-      </div>
+        <div className="flex items-center gap-2 my-5 bg-white w-max p-1 rounded-md shadow-sm">
+          {["Notifications", "Security", "Transaction"].map((tab) => {
+            const isActive = tab === activeTab;
+
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab as any)}
+                className={
+                  isActive
+                    ? "px-5 py-2 rounded-md text-sm bg-[rgb(254,242,237)] text-[#f36932] font-medium"
+                    : "px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100"
+                }
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
 
       {/* ---------------- TAB CONTENT ---------------- */}
-      {activeTab === "notifications" && (
+      {activeTab === "Notifications" && (
         <NotificationsSection toggles={toggles} handleToggle={handleToggle} />
       )}
 
-      {activeTab === "security" && <SecuritySection />}
+      {activeTab === "Security" && <SecuritySection />}
 
-      {activeTab === "transaction" && <TransactionSection />}
+      {activeTab === "Transaction" && <TransactionSection />}
     </div>
   );
 }
@@ -73,27 +74,27 @@ export default function SettingsPage() {
 /* -------------------------------------------------
    TAB BUTTON
 --------------------------------------------------- */
-function TabButton({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active?: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`pb-2 font-medium transition ${active
-          ? "text-orange-500 border-b-2 border-orange-500"
-          : "text-gray-500 hover:text-gray-700"
-        }`}
-    >
-      {label}
-    </button>
-  );
-}
+// function TabButton({
+//   label,
+//   active,
+//   onClick,
+// }: {
+//   label: string;
+//   active?: boolean;
+//   onClick: () => void;
+// }) {
+//   return (
+//     <button
+//       onClick={onClick}
+//       className={`pb-2 font-medium transition ${active
+//           ? "text-orange-500 border-b-2 border-orange-500"
+//           : "text-gray-500 hover:text-gray-700"
+//         }`}
+//     >
+//       {label}
+//     </button>
+//   );
+// }
 
 /* -------------------------------------------------
    NOTIFICATIONS SECTION
@@ -107,7 +108,7 @@ function NotificationsSection({
 }) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border">
-      <h2 className="font-semibold text-lg mb-6">Notification Preferences</h2>
+      <h2 className="font-semibold text-base mb-6">Notification Preferences</h2>
 
       <p className="text-sm text-gray-600 mb-4">
         Choose how you want to receive updates and alerts
@@ -133,7 +134,7 @@ function NotificationsSection({
         ))}
       </div>
 
-      <h2 className="font-semibold text-lg mb-4">Notification Schedule</h2>
+      <h2 className="font-semibold text-base mb-4">Notification Schedule</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <SelectField label="Quiet Hours Start" defaultValue="10:00 PM" />
@@ -152,7 +153,7 @@ function SecuritySection() {
 
       {/* -------- Security Settings -------- */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">Security Settings</h2>
+        <h2 className="text-base font-semibold mb-4">Security Settings</h2>
 
         <div className="border rounded-xl p-6 space-y-6">
 
@@ -214,18 +215,18 @@ function TransactionSection() {
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border">
 
-      <h2 className="text-lg font-semibold mb-6">Fees Settings</h2>
+      <h2 className="text-base font-semibold mb-6">Fees Settings</h2>
 
       <div className="border rounded-xl p-6">
 
         {/* Management Fee */}
         <div className="flex justify-between items-center pb-5 border-b">
           <div>
-            <p className="font-medium">Management Fee</p>
-            <p className="text-sm text-gray-500">15%</p>
+            <p className="font-medium text-[14px]">Management Fee</p>
+            <p className="text-xs text-gray-500">15%</p>
           </div>
 
-          <button className="px-4 py-1.5 border rounded-lg text-gray-600 hover:bg-gray-50">
+          <button className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50">
             Update
           </button>
         </div>
@@ -233,11 +234,11 @@ function TransactionSection() {
         {/* VAT */}
         <div className="flex justify-between items-center pt-5">
           <div>
-            <p className="font-medium">VAT</p>
-            <p className="text-sm text-gray-500">7.5%</p>
+            <p className="font-medium text-[14px]">VAT</p>
+            <p className="text-xs text-gray-500">7.5%</p>
           </div>
 
-          <button className="px-4 py-1.5 border rounded-lg text-gray-600 hover:bg-gray-50">
+          <button className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50">
             Update
           </button>
         </div>
@@ -265,8 +266,8 @@ function ToggleRow({
   return (
     <div className="flex justify-between items-center">
       <div>
-        <p className="font-medium">{label}</p>
-        <p className="text-sm text-gray-500">{description}</p>
+        <p className="font-medium text-[14px]">{label}</p>
+        <p className="text-[12px] text-gray-500">{description}</p>
       </div>
 
       <button
@@ -293,7 +294,7 @@ function SelectField({
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
-      <select className="w-full border rounded-lg p-2.5 focus:ring-orange-400 focus:border-orange-400">
+      <select className="w-full text-sm border rounded-lg p-2.5 focus:ring-orange-400 focus:border-orange-400">
         <option>{defaultValue}</option>
       </select>
     </div>
@@ -314,14 +315,14 @@ function SecurityRow({
   return (
     <div className="flex justify-between items-center">
       <div>
-        <p className={`font-medium ${danger ? "text-red-600" : ""}`}>{title}</p>
-        <p className={`text-sm ${danger ? "text-red-500" : "text-gray-500"}`}>
+        <p className={`font-medium text-[14px] ${danger ? "text-red-600" : ""}`}>{title}</p>
+        <p className={`text-xs ${danger ? "text-red-500" : "text-gray-500"}`}>
           {desc}
         </p>
       </div>
 
       <button
-        className={`px-4 py-1.5 border rounded-lg text-sm ${danger
+        className={`px-4 py-1.5 border rounded-lg text-xs ${danger
             ? "border-red-500 text-red-500 hover:bg-red-50"
             : "border-gray-300 text-gray-600 hover:bg-gray-50"
           }`}
@@ -342,8 +343,8 @@ function SecurityToggleRow({
   return (
     <div className="flex justify-between items-center">
       <div>
-        <p className="font-medium">{title}</p>
-        <p className="text-sm text-gray-500">{desc}</p>
+        <p className="font-medium text-[14px]">{title}</p>
+        <p className="text-xs text-gray-500">{desc}</p>
       </div>
 
       <label className="relative inline-flex items-center cursor-pointer">
@@ -369,8 +370,8 @@ function LoginRow({
   return (
     <div className="border p-5 rounded-xl flex justify-between items-center">
       <div>
-        <p className="font-medium">{device}</p>
-        <p className="text-sm text-gray-500">
+        <p className="font-medium text-[14px]">{device}</p>
+        <p className="text-xs text-gray-500">
           {location} • {time}
         </p>
       </div>
@@ -380,7 +381,7 @@ function LoginRow({
           Current
         </span>
       ) : (
-        <button className="px-4 py-1.5 text-red-500 border border-red-400 rounded-lg text-sm hover:bg-red-50">
+        <button className="px-4 py-1.5 text-red-500 border border-red-400 rounded-lg text-xs hover:bg-red-50">
           Revoke
         </button>
       )}

@@ -9,16 +9,16 @@ export default function Notifications() {
   }));
 
   return (
-    <div className="w-full min-h-screen bg-[#F8F6F4] p-8">
+    <div className="w-full min-h-screen bg-[#F8F6F4] p-3">
       {/* Back */}
-      <button className="flex items-center text-gray-600 hover:text-gray-800 mb-4">
-        <ArrowLeft size={18} className="mr-1" />
+      <button className="flex items-center text-[14px] text-gray-600 hover:text-gray-800 mb-4">
+        <ArrowLeft size={14} className="mr-1" />
         Back
       </button>
 
       {/* Header */}
       <h1 className="text-2xl font-semibold text-gray-900">Notifications</h1>
-      <p className="text-gray-500 mt-1">
+      <p className="text-gray-500 text-[14px] mt-1">
         View and manage your notifications here
       </p>
 
@@ -26,23 +26,23 @@ export default function Notifications() {
       <div className="bg-white rounded-xl shadow-sm mt-6 border">
         {/* Top Bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-lg font-medium">Notifications</h2>
+          <h2 className="text-base font-medium">Notifications</h2>
 
           <div className="flex items-center gap-3">
             {/* Search */}
-            <div className="flex items-center bg-[#F8F8F8] rounded-full px-4 py-2 w-72">
-              <Search size={18} className="text-gray-400 mr-2" />
+            <div className="flex items-center bg-white border border-[rgba(232,234,237,1)] rounded-xl px-4 py-2 w-72">
+              <Search size={16} className="text-gray-400 mr-2" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full bg-transparent outline-none text-sm"
+                className="w-full bg-transparent outline-none text-xs"
               />
             </div>
 
             {/* Mark all read */}
-            <button className="bg-[#F8F8F8] hover:bg-[#eaeaea] transition px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+            <button className=" transition px-4 py-2 border border-[rgba(232,234,237,1)] rounded-xl text-xs text-[rgba(134,140,152,1)] flex items-center gap-2">
               Mark All As Read
-              <span className="text-green-500 text-lg">✓</span>
+              <span className="text-[rgba(134,140,152,1)] text-lg">✓</span>
             </button>
           </div>
         </div>
@@ -56,16 +56,16 @@ export default function Notifications() {
             >
               <div className="flex items-start gap-4">
                 {/* Avatar Icon */}
-                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[rgb(254,242,237)] flex items-center justify-center">
                   <Bell className="text-orange-500" size={18} />
                 </div>
 
                 {/* Text */}
                 <div>
-                  <h3 className="font-semibold text-gray-800">
+                  <h3 className="font-semibold text-[14px] text-gray-800">
                     Driver at Destination
                   </h3>
-                  <p className="text-gray-500 text-sm mt-1">
+                  <p className="text-gray-500 text-xs mt-1">
                     Lorem ipsum dolor sit amet consectetur. Eget viverra nunc
                     sapien tortor rte dignissim pellentesque dignissim quis at.
                   </p>
@@ -74,9 +74,9 @@ export default function Notifications() {
 
               {/* Time + Buttons */}
               <div className="flex items-center gap-6">
-                <p className="text-gray-500 text-sm w-20 text-right">11:00 AM</p>
+                <p className="text-gray-500 text-xs w-20 text-right">11:00 AM</p>
 
-                <button className="text-orange-500 text-sm hover:underline">
+                <button className="text-orange-500 text-xs hover:underline">
                   View Details
                 </button>
 

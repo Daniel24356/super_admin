@@ -10,7 +10,7 @@ export default function DashboardLayout() {
     <div
       className="
         min-h-screen 
-        bg-gray-100 
+        bg-[rgb(247,244,243)]
       "
     >
       {/* Sidebar (fixed on mobile but static on desktop) */}

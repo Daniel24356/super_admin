@@ -131,11 +131,13 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                         </Link>
                     </nav>
                 </div>
-
-                <button className="flex items-center gap-3 text-red-500 font-medium px-4 py-3">
+                <Link to="/">
+                   <button className="flex items-center gap-3 text-red-500 font-medium px-4 py-3">
                     <LogOut size={20} />
                     Logout
                 </button>
+                </Link>
+               
             </aside>
         </>
     );

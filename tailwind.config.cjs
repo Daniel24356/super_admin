@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}", // scan all JS/TS/JSX/TSX files inside src
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+        manrope: ["Manrope", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

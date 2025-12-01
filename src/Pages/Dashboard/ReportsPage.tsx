@@ -78,36 +78,40 @@ const ReportsPage = () => {
             gap-6
           "
         >
-          <div className="bg-white h-[155px] p-6 rounded-2xl shadow-sm flex flex-col gap-3">
+          <div className="bg-white h-[155px] py-4 px-6 rounded-2xl shadow-sm flex flex-col gap-2">
             <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
               <Users2 className="w-4 h-4 text-green-600" />
             </div>
-            <span className="text-gray-600 text-sm">Total Users</span>
-            <span className="text-2xl font-bold">100</span>
+            <span className="text-gray-600 text-sm">Total Requests</span>
+            <span className="text-2xl font-bold">50</span>
+            <span className="text-[rgba(196,0,0,1)] text-[12px] font-medium">14.0% from last month</span>
           </div>
 
-          <div className="bg-white h-[155px] p-6 rounded-2xl shadow-sm flex flex-col gap-3">
+          <div className="bg-white h-[155px] py-4 px-6 rounded-2xl shadow-sm flex flex-col gap-2">
             <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
               <Building2 className="w-4 h-4 text-orange-500" />
             </div>
-            <span className="text-gray-600 text-sm">Total Hospitals</span>
-            <span className="text-2xl font-bold">60</span>
+            <span className="text-gray-600 text-sm">Average Response Time</span>
+            <span className="text-2xl font-bold">6.9 min</span>
+            <span className="text-[rgba(11,134,0,1)] text-[12px] font-medium">31.0% better than target</span>
           </div>
 
-          <div className="bg-white h-[155px] p-6 rounded-2xl shadow-sm flex flex-col gap-3">
+          <div className="bg-white h-[155px] py-4 px-6 rounded-2xl shadow-sm flex flex-col gap-2">
             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
               <Activity className="w-4 h-4 text-blue-500" />
             </div>
-            <span className="text-gray-600 text-sm">Total Operators</span>
-            <span className="text-2xl font-bold">30</span>
+            <span className="text-gray-600 text-sm">Total Income</span>
+            <span className="text-2xl font-bold">$7,560</span>
+            <span className="text-[rgba(196,0,0,1)] text-[12px] font-medium">23.6% decr from last month</span>
           </div>
 
-          <div className="bg-white h-[155px] p-6 rounded-2xl shadow-sm flex flex-col gap-3">
+          <div className="bg-white h-[155px] py-4 px-6 rounded-2xl shadow-sm flex flex-col gap-2">
             <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
               <Wallet className="w-4 h-4 text-green-600" />
             </div>
-            <span className="text-gray-600 text-sm">Total Income</span>
-            <span className="text-2xl font-bold">$100,000</span>
+            <span className="text-gray-600 text-sm">Completion Rate</span>
+            <span className="text-2xl font-bold">97.7%</span>
+            <span className="text-[rgba(11,134,0,1)] text-[12px] font-medium">42 of 43 requests completed</span>
           </div>
         </div>
 

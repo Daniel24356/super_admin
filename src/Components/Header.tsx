@@ -75,7 +75,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
 
                             {/* Header */}
                             <div className="flex items-center gap-3 px-4 py-4 border-b">
-                                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-full bg-[rgb(254,242,237)] flex items-center justify-center">
                                     <Bell className="text-orange-500" size={18} />
                                 </div>
                                 <h2 className="text-base font-semibold">Notifications (6)</h2>
@@ -93,7 +93,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                                         className="flex items-start justify-between px-4 py-4 hover:bg-gray-50 cursor-pointer"
                                     >
                                         <div className="flex items-start gap-3">
-                                            <div className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center">
+                                            <div className="w-9 h-9 rounded-full bg-[rgb(254,242,237)] flex items-center justify-center">
                                                 <Bell className="text-orange-500" size={16} />
                                             </div>
 
@@ -109,8 +109,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                             </div>
 
                             {/* Footer */}
-                            <div className="border-t py-3 text-center">
-                                <Link to="/admin/notifications" className="text-sm text-orange-500 font-medium hover:underline">
+                            <div className="border-t py-3 text-right px-4">
+                                <Link to="/admin/notifications" className="text-sm text-orange-500 font-medium underline">
                                     See all notifications
                                 </Link>
                             </div>
