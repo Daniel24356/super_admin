@@ -10,14 +10,14 @@ const data = [
 
 export const UserDistributionChart = () => {
 return (
-<div className="bg-white p-6 rounded-2xl shadow-sm border w-full h-[420px]">
+<div className="bg-white p-6 rounded-2xl shadow-sm border w-full h-[440px]">
 <h2 className="text-lg font-semibold">User Distribution</h2>
 <p className="text-gray-500 text-sm mb-4">Representation of total users</p>
 
 
 <div className="flex flex-col gap-4 md:flex-row md:gap-6">
 {/* Pie Chart */}
-<div className="w-full md:w-1/2 h-[160px] md:h-[260px] flex items-center justify-center relative">
+<div className="w-full md:w-1/2 h-[200px] md:h-[260px] flex items-center justify-center relative">
 <ResponsiveContainer width="100%" height="100%">
 <PieChart>
 <Pie
@@ -46,6 +46,7 @@ dataKey="value"
 ))}
 </div>
 </div>
+
 </div>
 );
 };

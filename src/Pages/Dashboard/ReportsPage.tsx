@@ -116,25 +116,35 @@ const ReportsPage = () => {
         </div>
 
         {/* ======= CHART TABS ======= */}
-        <div className="flex items-center gap-2 my-5 bg-white w-max p-2 rounded-sm shadow-sm">
-          {["Performance", "Volume", "Financial", "Users"].map((tab) => {
-            const isActive = tab === activeTab;
+ <div className="mb-6">
+  <div className="
+      grid grid-cols-2 gap-2 mt-5 
+      bg-white w-fit py-1 px-1 rounded-md 
+      sm:flex sm:flex-row sm:items-center sm:gap-3
+    "
+  >
+    {["Performance", "Volume", "Financial", "Users"].map((tab) => {
+      const isActive = tab === activeTab;
 
-            return (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab as any)}
-                className={
-                  isActive
-                    ? "px-5 py-2 rounded-sm text-sm bg-[#ffece7] text-[#f36932] font-medium"
-                    : "px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100"
-                }
-              >
-                {tab}
-              </button>
-            );
-          })}
-        </div>
+      return (
+        <button
+          key={tab}
+          onClick={() => setActiveTab(tab as any)}
+          className={`
+            px-4 py-2 rounded-md text-sm w-full sm:w-auto
+            ${isActive
+              ? "bg-[#ffece7] text-[#f36932] font-medium"
+              : "bg-transparent text-gray-600"
+            }
+          `}
+        >
+          {tab}
+        </button>
+      );
+    })}
+  </div>
+</div>
+
 
         {/* ======= CHARTS SWITCHER (REQUIRED) ======= */}
         <div className="bg-white rounded-2xl shadow-sm p-6">
@@ -151,7 +161,7 @@ const ReportsPage = () => {
           </p>
 
           {/* MAIN CHART */}
-          <div className="w-full h-[450px]">
+          <div className="w-full h-auto md:h-[450px]">
             {activeTab === "Financial" && (
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data}>
