@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, Contact, IdCard, Smile } from "lucide-react";
 import { useState } from "react";
 import DisapproveModal from "./DissaproveModal";
 
@@ -15,8 +15,11 @@ import SuccessModal from "./SuccessModal";
 
 export default function HospitalDetailsModal({ open, onClose, data }: Props) {
   const [openDisapprove, setOpenDisapprove] = useState(false);
+  const [openApprove, setOpenApprove] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedName] = useState("CityWide Hospital");
+  const [successType, setSuccessType] = useState<"approved" | "disapproved" | null>(null);
+
 
   if (!open || !data) return null;
 
@@ -31,7 +34,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
           </button>
 
           {/* TITLE */}
-          <h2 className="text-xl font-semibold mb-5">Hospital Details</h2>
+          <h2 className="text-lg font-semibold mb-5">Hospital Details</h2>
 
           {/* TOP SECTION */}
           <div className="flex items-start justify-between border-b pb-5">
@@ -42,33 +45,33 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
               />
 
               <div>
-                <h3 className="font-semibold text-lg">Metro Hospital</h3>
-                <p className="text-gray-600 text-sm">info.metrohospital@gmail.com</p>
-                <p className="text-gray-600 text-sm">Cadastral Zone, Abuja</p>
+                <h3 className="font-semibold text-base">Metro Hospital</h3>
+                <p className="text-gray-600 text-xs">info.metrohospital@gmail.com</p>
+                <p className="text-gray-600 text-xs">Cadastral Zone, Abuja</p>
               </div>
             </div>
 
             <div className="text-right pr-4">
-              <span className="text-sm text-orange-500 bg-orange-100 px-3 py-1 rounded-md">
+              <span className="text-[11px] text-[rgba(254,188,47,1)] bg-[rgba(254,188,47,0.08)] px-3 py-1 rounded-full">
                 Pending
               </span>
-              <p className="text-gray-700 mt-2 font-medium">
+              <p className="text-gray-700 mt-2 text-xs font-medium">
                 Hospital Admin
               </p>
-              <p className="text-sm text-gray-600">Dr. Sarah Wilson</p>
+              <p className="text-xs text-[rgba(0,0,0,1)]">Dr. Sarah Wilson</p>
             </div>
           </div>
 
           {/* CONTACT DETAILS */}
           <div className="py-5 space-y-3 text-sm">
-            <p className="flex items-center gap-2">
-              <span className="font-medium">📞 Contact Number:</span>
-              <span className="text-orange-500">09045678342</span>
+            <p className="flex items-center justify-between gap-2">
+              <span className="flex items-center gap-2 font-medium text-xs"><Contact size={14} />Contact Number:</span>
+              <span className="text-[rgba(242,124,74,1)] text-[14px]">09045678342</span>
             </p>
 
-            <p className="flex items-center gap-2">
-              <span className="font-medium">🔖 License Number:</span>
-              <span className="text-orange-500">Dr. Sarah Wilson</span>
+            <p className="flex items-center justify-between gap-2">
+              <span className="flex items-center gap-2 font-medium text-xs"><IdCard size={14} /> License Number:</span>
+              <span className="text-[rgba(242,124,74,1)] text-[14px]">Dr. Sarah Wilson</span>
             </p>
           </div>
 
@@ -78,16 +81,16 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
             <div className="border rounded-lg p-3">
               <img src={img1} className="w-full h-32 object-contain" />
               <div className="mt-2 flex justify-between text-sm">
-                <span className="font-medium">Certification</span>
-                <span className="text-gray-500">JPEG</span>
+                <span className="font-medium text-[14px]">Certification</span>
+                <span className="text-gray-500 text-[14px]">JPEG</span>
               </div>
             </div>
 
             <div className="border rounded-lg p-3">
               <img src={img2} className="w-full h-32 object-contain" />
               <div className="mt-2 flex justify-between text-sm">
-                <span className="font-medium">Logo</span>
-                <span className="text-gray-500">JPEG</span>
+                <span className="font-medium text-[14px]">Logo</span>
+                <span className="text-gray-500 text-[14px]">JPEG</span>
               </div>
             </div>
           </div>
@@ -96,12 +99,17 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
           <div className="flex justify-center gap-4 mt-6">
             <button
               onClick={() => setOpenDisapprove(true)}
-              className="px-6 py-2 border border-gray-300 rounded-full text-gray-600 hover:bg-gray-100"
+              className="px-6 py-2 border text-[16px] border-gray-300 rounded-full text-gray-600 hover:bg-gray-100"
             >
               Disapprove
             </button>
 
-            <button className="px-6 py-2 rounded-full bg-orange-500 text-white hover:bg-orange-600">
+            <button
+              onClick={() => {
+                setOpenApprove(true);
+                setSuccessType("approved");
+              }}
+              className="px-6 py-2 rounded-full text-[16px] bg-[rgba(242,124,74,1)] text-white hover:bg-orange-600">
               Approve
             </button>
           </div>
@@ -113,7 +121,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
       <DisapproveModal
         isOpen={openDisapprove}
         onClose={() => setOpenDisapprove(false)}
-         onSubmit={(reason, message) => {
+        onSubmit={(reason, message) => {
           console.log("reason:", reason);
           console.log("message:", message);
 
@@ -121,8 +129,8 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
           setTimeout(() => setShowSuccess(true), 150); // open success modal
         }}
       />
-      
-       <SuccessModal
+
+      <SuccessModal
         open={showSuccess}
         onClose={() => setShowSuccess(false)}
         icon="😊"
@@ -130,7 +138,22 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
         message={
           <>
             You have successfully disapproved{" "}
-            <span className="text-orange-500 font-semibold">{selectedName}</span>
+            <span className="text-[rgba(242,124,74,1)] font-semibold">{selectedName}</span>
+            ’s verification.
+          </>
+        }
+        buttonText="Continue"
+      />
+
+      <SuccessModal
+        open={openApprove}
+        onClose={() => setOpenApprove(false)}
+        icon="😁"
+        title="Verification Approved"
+        message={
+          <>
+            You have successfully approved{" "}
+            <span className="text-[rgba(242,124,74,1)] font-semibold">{selectedName}</span>
             ’s verification.
           </>
         }

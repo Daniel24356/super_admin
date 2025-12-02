@@ -5,7 +5,7 @@ import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import { Eye, UserMinus, Ban, AlertTriangle} from "lucide-react";
+import { Eye, UserMinus, Ban, AlertTriangle } from "lucide-react";
 import HospitalDetailsModal from "../../Components/HospitalDetailsModel";
 import ConfirmModal from "../../Components/ConfirmModel";
 
@@ -32,38 +32,40 @@ export default function AmbulanceOperators() {
   const [activeTab, setActiveTab] = useState("Drivers");
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const [selectedHospital, setSelectedHospital] = useState<Driver | null>(null);
-  
-    // ✅ NEW STATES FOR SUSPEND MODAL
+
+  // 🔥 Suspend Modal State
   const [openSuspendModal, setOpenSuspendModal] = useState(false);
   const [driverToSuspend, setDriverToSuspend] = useState<Driver | null>(null);
 
+  // 🔥 Remove Modal State (NEW)
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
+  const [driverToRemove, setDriverToRemove] = useState<Driver | null>(null);
+
   return (
     <div className="p-3 min-h-screen">
-      {/* PAGE HEADER */}
       <h1 className="text-2xl font-semibold ">Ambulance Operators</h1>
       <p className="text-gray-600 text-sm mb-6">
         View and manage all Ambulance Operators here
       </p>
 
       {/* TABS */}
-     <div className="mb-6">
-  <div className="grid grid-cols-3 gap-3 bg-white w-fit py-1 px-1 rounded-md sm:flex sm:flex-row sm:items-center sm:gap-3">
-    {tabs.map((tab) => (
-      <button
-        key={tab}
-        onClick={() => setActiveTab(tab)}
-        className={`px-4 py-2 rounded-md text-sm w-full sm:w-auto
-          ${activeTab === tab
-            ? "bg-[rgb(254,242,237)] border-orange-400 text-orange-600"
-            : "bg-transparent text-gray-600"
-          }`}
-      >
-        {tab}
-      </button>
-    ))}
-  </div>
-</div>
-
+      <div className="mb-6">
+        <div className="grid grid-cols-3 gap-3 bg-white w-fit py-1 px-1 rounded-md sm:flex sm:flex-row sm:items-center sm:gap-3">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 rounded-md text-sm w-full sm:w-auto
+                ${activeTab === tab
+                  ? "bg-[rgb(254,242,237)] border-orange-400 text-orange-600"
+                  : "bg-transparent text-gray-600"
+                }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* TABLE CARD */}
       <div className="bg-white p-6 rounded-xl shadow-sm border">
@@ -116,10 +118,7 @@ export default function AmbulanceOperators() {
 
             <tbody className="text-gray-800">
               {drivers.map((d, index) => (
-                <tr
-                  key={index}
-                  className="border-b hover:bg-gray-50 transition"
-                >
+                <tr key={index} className="border-b hover:bg-gray-50 transition">
                   <td className="py-3 px-4 text-[14px]">{d.name}</td>
                   <td className="py-3 px-4 text-[14px]">{d.email}</td>
                   <td className="py-3 px-4 text-[14px]">{d.operator}</td>
@@ -139,29 +138,42 @@ export default function AmbulanceOperators() {
                     </button>
 
                     {openMenuIndex === index && (
-                    <div className="absolute right-12 top-6 w-44 bg-white shadow-lg rounded-xl border z-20 py-2">
-                      <button
-                        onClick={() => {
+                      <div className="absolute right-12 top-6 w-44 bg-white shadow-lg rounded-xl border z-20 py-2">
+
+                        <button
+                          onClick={() => {
                             setSelectedHospital(d);
                             setOpenMenuIndex(null);
                           }}
-                       className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
-                        <Eye className="w-4 h-4 text-gray-600" /> View Details
-                      </button>
-                      <button 
-                        onClick={() => {
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100"
+                        >
+                          <Eye className="w-4 h-4 text-gray-600" /> View Details
+                        </button>
+
+                        <button
+                          onClick={() => {
                             setDriverToSuspend(d);
                             setOpenMenuIndex(null);
                             setOpenSuspendModal(true);
                           }}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
-                        <Ban className="w-4 h-4 text-yellow-600" /> Suspend User
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600">
-                        <UserMinus className="w-4 h-4 text-red-600" /> Remove User
-                      </button>
-                    </div>
-                  )}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100"
+                        >
+                          <Ban className="w-4 h-4 text-yellow-600" /> Suspend User
+                        </button>
+
+                        {/* REMOVE USER BUTTON (NEW) */}
+                        <button
+                          onClick={() => {
+                            setDriverToRemove(d);
+                            setOpenMenuIndex(null);
+                            setOpenRemoveModal(true);
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600"
+                        >
+                          <UserMinus className="w-4 h-4 text-red-600" /> Remove User
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -175,11 +187,13 @@ export default function AmbulanceOperators() {
             Previous
           </button>
           <p className="text-gray-600 text-sm">Page 1 of 10</p>
-          <button className="px-4 py-2 text-[14px] border rounded-lg bg-white">Next</button>
+          <button className="px-4 py-2 text-[14px] border rounded-lg bg-white">
+            Next
+          </button>
         </div>
       </div>
 
-       {/* DETAILS MODAL */}
+      {/* DETAILS MODAL */}
       <HospitalDetailsModal
         open={!!selectedHospital}
         data={selectedHospital}
@@ -196,10 +210,33 @@ export default function AmbulanceOperators() {
         }}
         title="Suspend User?"
         message={`Are you sure you want to suspend ${driverToSuspend?.name}? This action cannot be reversed.`}
-        icon={<AlertTriangle className="text-orange-500" size={32} />}
+        icon={<AlertTriangle className="text-white" size={22} />}
+        iconBgColor="bg-[rgba(242,124,74,1)]"
         confirmText="Yes, Suspend"
         cancelText="No"
-        confirmColor="bg-[#F27C4A]"
+        confirmColor="bg-[rgba(242,124,74,1)]"
+
+      />
+
+      {/* 🔥 REMOVE USER CONFIRM MODAL (NEW) */}
+      <ConfirmModal
+        isOpen={openRemoveModal}
+        onCancel={() => setOpenRemoveModal(false)}
+        onConfirm={() => {
+          console.log("Removing:", driverToRemove?.name);
+          setOpenRemoveModal(false);
+        }}
+        title="Remove User?"
+        message="Are you sure you want to remove this user? This action cannot be reversed."
+        icon={<UserMinus className="text-white" size={22} />}
+        iconBgColor="bg-[rgba(196,0,0,1)]"
+        confirmText="Yes, Remove"
+        cancelText="No"
+        confirmColor="bg-[rgba(196,0,0,1)]"
+        successTitle="User Removed"
+        successMessage="You have removed CityWide Hospital from the platform."
+        successIcon="😄"
+        successButtonText="Continue"
       />
     </div>
   );

@@ -45,6 +45,9 @@ export default function HospitalsPage() {
   const [openSuspendModal, setOpenSuspendModal] = useState(false);
   const [driverToSuspend, setDriverToSuspend] = useState<Hospital | null>(null);
 
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
+    const [driverToRemove, setDriverToRemove] = useState<Hospital | null>(null);
+
   return (
     <div className="p-3 min-h-screen">
       {/* PAGE HEADER */}
@@ -171,7 +174,13 @@ export default function HospitalsPage() {
                       className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
                         <Ban className="w-4 h-4 text-yellow-600" /> Suspend User
                       </button>
-                      <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600">
+                      <button 
+                       onClick={() => {
+                            setDriverToRemove(d);
+                            setOpenMenuIndex(null);
+                            setOpenRemoveModal(true);
+                          }}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 text-red-600">
                         <UserMinus className="w-4 h-4 text-red-600" /> Remove User
                       </button>
                     </div>
@@ -210,10 +219,32 @@ export default function HospitalsPage() {
         }}
         title="Suspend User?"
         message={`Are you sure you want to suspend ${driverToSuspend?.name}? This action cannot be reversed.`}
-        icon={<AlertTriangle className="text-orange-500" size={32} />}
+        icon={<AlertTriangle className="text-white" size={22} />}
+        iconBgColor="bg-[rgba(242,124,74,1)]"
         confirmText="Yes, Suspend"
         cancelText="No"
-        confirmColor="bg-[#F27C4A]"
+        confirmColor="bg-[rgba(242,124,74,1)]"
+      />
+
+        {/* 🔥 REMOVE USER CONFIRM MODAL (NEW) */}
+      <ConfirmModal
+        isOpen={openRemoveModal}
+        onCancel={() => setOpenRemoveModal(false)}
+        onConfirm={() => {
+          console.log("Removing:", driverToRemove?.name);
+          setOpenRemoveModal(false);
+        }}
+        title="Remove User?"
+        message="Are you sure you want to remove this user? This action cannot be reversed."
+        icon={<UserMinus className="text-white" size={22} />}
+        iconBgColor="bg-[rgba(196,0,0,1)]"
+        confirmText="Yes, Remove"
+        cancelText="No"
+        confirmColor="bg-[rgba(196,0,0,1)]"
+        successTitle="User Removed"
+        successMessage="You have removed CityWide Hospital from the platform."
+        successIcon="😄"
+        successButtonText="Continue"
       />
     </div>
   );

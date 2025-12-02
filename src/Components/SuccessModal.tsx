@@ -51,7 +51,7 @@ export default function SuccessModal({
         {/* BUTTON */}
         <button
           onClick={onClose}
-          className={`w-full mt-6 py-2 rounded-full text-white font-medium transition ${buttonColor}`}
+          className={`w-fit px-8 mt-6 py-2 rounded-full text-[16px] text-white font-medium transition ${buttonColor}`}
         >
           {buttonText}
         </button>

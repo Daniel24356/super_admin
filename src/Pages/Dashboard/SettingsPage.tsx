@@ -1,4 +1,6 @@
 import { useState } from "react";
+import UpdatePasswordModal from "../../Components/UpdatePasswordModal";
+import TransactionSettingModal from "../../Components/TransactionSettingModal";
 
 /* -------------------------------------------------
    NOTIFICATION TOGGLES
@@ -18,9 +20,16 @@ export default function SettingsPage() {
     "Notifications" | "Security" | "Transaction"
   >("Notifications");
 
+  /* -------------------------------------
+      NEW STATE FOR MODALS
+  -------------------------------------- */
+  const [openPasswordModal, setOpenPasswordModal] = useState(false);
+  const [openTransactionModal, setOpenTransactionModal] = useState(false);
+
   const handleToggle = (key: keyof typeof togglesInitial) => {
     setToggles({ ...toggles, [key]: !toggles[key] });
   };
+
 
   return (
     <div className="min-h-screen p-3 text-gray-800">
@@ -39,62 +48,56 @@ export default function SettingsPage() {
         </button>
       </div>
 
-        <div className="flex items-center gap-2 my-5 bg-white w-max p-1 rounded-md shadow-sm">
-          {["Notifications", "Security", "Transaction"].map((tab) => {
-            const isActive = tab === activeTab;
+      <div className="flex items-center gap-2 my-5 bg-white w-max p-1 rounded-md shadow-sm">
+        {["Notifications", "Security", "Transaction"].map((tab) => {
+          const isActive = tab === activeTab;
 
-            return (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab as any)}
-                className={
-                  isActive
-                    ? "px-5 py-2 rounded-md text-sm bg-[rgb(254,242,237)] text-[#f36932] font-medium"
-                    : "px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100"
-                }
-              >
-                {tab}
-              </button>
-            );
-          })}
-        </div>
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab as any)}
+              className={
+                isActive
+                  ? "px-5 py-2 rounded-md text-sm bg-[rgb(254,242,237)] text-[#f36932] font-medium"
+                  : "px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100"
+              }
+            >
+              {tab}
+            </button>
+          );
+        })}
+      </div>
 
       {/* ---------------- TAB CONTENT ---------------- */}
       {activeTab === "Notifications" && (
         <NotificationsSection toggles={toggles} handleToggle={handleToggle} />
       )}
 
-      {activeTab === "Security" && <SecuritySection />}
+      {activeTab === "Security" && (
+        <SecuritySection
+          openPasswordModal={() => setOpenPasswordModal(true)}
+        />
+      )}
 
-      {activeTab === "Transaction" && <TransactionSection />}
+      {activeTab === "Transaction" && (
+        <TransactionSection
+          openTransactionModal={() => setOpenTransactionModal(true)}
+        />
+      )}
+
+      {/* ---------------- MODALS ---------------- */}
+      <UpdatePasswordModal
+        open={openPasswordModal}
+        onClose={() => setOpenPasswordModal(false)}
+      />
+
+      <TransactionSettingModal
+        open={openTransactionModal}
+        onClose={() => setOpenTransactionModal(false)}
+      />
     </div>
   );
 }
-
-/* -------------------------------------------------
-   TAB BUTTON
---------------------------------------------------- */
-// function TabButton({
-//   label,
-//   active,
-//   onClick,
-// }: {
-//   label: string;
-//   active?: boolean;
-//   onClick: () => void;
-// }) {
-//   return (
-//     <button
-//       onClick={onClick}
-//       className={`pb-2 font-medium transition ${active
-//           ? "text-orange-500 border-b-2 border-orange-500"
-//           : "text-gray-500 hover:text-gray-700"
-//         }`}
-//     >
-//       {label}
-//     </button>
-//   );
-// }
 
 /* -------------------------------------------------
    NOTIFICATIONS SECTION
@@ -130,7 +133,6 @@ function NotificationsSection({
             value={toggles[key as keyof typeof togglesInitial]}
             onChange={() => handleToggle(key as keyof typeof togglesInitial)}
           />
-
         ))}
       </div>
 
@@ -145,9 +147,13 @@ function NotificationsSection({
 }
 
 /* -------------------------------------------------
-   SECURITY SECTION (EXACT UI CLONE)
+   SECURITY SECTION — now opens password modal
 --------------------------------------------------- */
-function SecuritySection() {
+function SecuritySection({
+  openPasswordModal,
+}: {
+  openPasswordModal: () => void;
+}) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border space-y-10">
 
@@ -162,6 +168,7 @@ function SecuritySection() {
             title="Change Password"
             desc="Last changed 3 months ago"
             btn="Update"
+            onClick={openPasswordModal}  // <-- ADDED
           />
 
           {/* Two-Factor */}
@@ -208,10 +215,13 @@ function SecuritySection() {
 }
 
 /* -------------------------------------------------
-   TRANSACTION SECTION (NEW)
-   EXACTLY MATCHES YOUR SCREENSHOT
+   TRANSACTION SECTION — now opens modal
 --------------------------------------------------- */
-function TransactionSection() {
+function TransactionSection({
+  openTransactionModal,
+}: {
+  openTransactionModal: () => void;
+}) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border">
 
@@ -226,7 +236,10 @@ function TransactionSection() {
             <p className="text-xs text-gray-500">15%</p>
           </div>
 
-          <button className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50">
+          <button
+            className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50"
+            onClick={openTransactionModal}   // <-- ADDED
+          >
             Update
           </button>
         </div>
@@ -238,7 +251,10 @@ function TransactionSection() {
             <p className="text-xs text-gray-500">7.5%</p>
           </div>
 
-          <button className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50">
+          <button
+            className="px-4 py-1.5 border rounded-lg text-xs text-gray-600 hover:bg-gray-50"
+            onClick={openTransactionModal}   // <-- ADDED
+          >
             Update
           </button>
         </div>
@@ -249,8 +265,11 @@ function TransactionSection() {
 }
 
 /* -------------------------------------------------
-   SMALL COMPONENTS
+   SMALL COMPONENTS (unchanged UI)
 --------------------------------------------------- */
+
+// ToggleRow, SelectField, SecurityRow, SecurityToggleRow, LoginRow remain the same
+// except SecurityRow now accepts onClick which is optional
 
 function ToggleRow({
   label,
@@ -272,12 +291,14 @@ function ToggleRow({
 
       <button
         onClick={onChange}
-        className={`w-12 h-6 flex items-center rounded-full p-1 transition ${value ? "bg-orange-500" : "bg-gray-300"
-          }`}
+        className={`w-12 h-6 flex items-center rounded-full p-1 transition ${
+          value ? "bg-orange-500" : "bg-gray-300"
+        }`}
       >
         <div
-          className={`w-4 h-4 bg-white rounded-full shadow transform transition ${value ? "translate-x-6" : "translate-x-0"
-            }`}
+          className={`w-4 h-4 bg-white rounded-full shadow transform transition ${
+            value ? "translate-x-6" : "translate-x-0"
+          }`}
         />
       </button>
     </div>
@@ -306,26 +327,32 @@ function SecurityRow({
   desc,
   btn,
   danger,
+  onClick,
 }: {
   title: string;
   desc: string;
   btn: string;
   danger?: boolean;
+  onClick?: () => void;
 }) {
   return (
     <div className="flex justify-between items-center">
       <div>
-        <p className={`font-medium text-[14px] ${danger ? "text-red-600" : ""}`}>{title}</p>
+        <p className={`font-medium text-[14px] ${danger ? "text-red-600" : ""}`}>
+          {title}
+        </p>
         <p className={`text-xs ${danger ? "text-red-500" : "text-gray-500"}`}>
           {desc}
         </p>
       </div>
 
       <button
-        className={`px-4 py-1.5 border rounded-lg text-xs ${danger
+        onClick={onClick}
+        className={`px-4 py-1.5 border rounded-lg text-xs ${
+          danger
             ? "border-red-500 text-red-500 hover:bg-red-50"
             : "border-gray-300 text-gray-600 hover:bg-gray-50"
-          }`}
+        }`}
       >
         {btn}
       </button>
