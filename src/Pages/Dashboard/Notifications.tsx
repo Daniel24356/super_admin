@@ -1,20 +1,23 @@
 import { ArrowLeft, Search, Trash2, Bell } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const notifications = new Array(9).fill(null).map(() => ({
     title: "Driver at Destination",
     message:
       "Lorem ipsum dolor sit amet consectetur. Eget viverra nunc sapien tortor rte dignissim pellentesque dignissim quis at.",
-    time: "11:00 AM"
+    time: "11:00 AM",
   }));
 
   return (
     <div className="w-full min-h-screen bg-[#F8F6F4] p-3">
       {/* Back */}
+      <Link to="/admin">
       <button className="flex items-center text-[14px] text-gray-600 hover:text-gray-800 mb-4">
         <ArrowLeft size={14} className="mr-1" />
         Back
       </button>
+      </Link>
 
       {/* Header */}
       <h1 className="text-2xl font-semibold text-gray-900">Notifications</h1>
@@ -25,12 +28,13 @@ export default function Notifications() {
       {/* Main Card */}
       <div className="bg-white rounded-xl shadow-sm mt-6 border">
         {/* Top Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between px-6 py-4 border-b">
           <h2 className="text-base font-medium">Notifications</h2>
 
-          <div className="flex items-center gap-3">
+          {/* Right Controls */}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3 w-full lg:w-auto">
             {/* Search */}
-            <div className="flex items-center bg-white border border-[rgba(232,234,237,1)] rounded-xl px-4 py-2 w-72">
+            <div className="flex items-center bg-white border border-[rgba(232,234,237,1)] rounded-xl px-4 py-2 w-full sm:w-72">
               <Search size={16} className="text-gray-400 mr-2" />
               <input
                 type="text"
@@ -40,7 +44,7 @@ export default function Notifications() {
             </div>
 
             {/* Mark all read */}
-            <button className=" transition px-4 py-2 border border-[rgba(232,234,237,1)] rounded-xl text-xs text-[rgba(134,140,152,1)] flex items-center gap-2">
+            <button className="transition px-4 py-2 border border-[rgba(232,234,237,1)] rounded-xl text-xs text-[rgba(134,140,152,1)] flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
               Mark All As Read
               <span className="text-[rgba(134,140,152,1)] text-lg">✓</span>
             </button>
@@ -52,8 +56,14 @@ export default function Notifications() {
           {notifications.map((_, idx) => (
             <div
               key={idx}
-              className="flex items-start justify-between px-6 py-5 hover:bg-gray-50 transition"
+              className="
+                flex flex-col gap-4
+                md:flex-row md:items-start md:justify-between
+                px-6 py-5
+                hover:bg-gray-50 transition
+              "
             >
+              {/* Left Side */}
               <div className="flex items-start gap-4">
                 {/* Avatar Icon */}
                 <div className="w-10 h-10 rounded-full bg-[rgb(254,242,237)] flex items-center justify-center">
@@ -72,9 +82,11 @@ export default function Notifications() {
                 </div>
               </div>
 
-              {/* Time + Buttons */}
-              <div className="flex items-center gap-6">
-                <p className="text-gray-500 text-xs w-20 text-right">11:00 AM</p>
+              {/* Right Side */}
+              <div className="flex items-center md:items-center gap-6 md:gap-6 flex-wrap md:flex-nowrap">
+                <p className="text-gray-500 text-xs w-full md:w-20 text-left md:text-right">
+                  11:00 AM
+                </p>
 
                 <button className="text-orange-500 text-xs hover:underline">
                   View Details
