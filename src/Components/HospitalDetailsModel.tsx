@@ -1,4 +1,4 @@
-import { X, Contact, IdCard, Smile } from "lucide-react";
+import { X, Contact, IdCard } from "lucide-react";
 import { useState } from "react";
 import DisapproveModal from "./DissaproveModal";
 
@@ -19,7 +19,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedName] = useState("CityWide Hospital");
   const [successType, setSuccessType] = useState<"approved" | "disapproved" | null>(null);
-
+   console.log(successType) 
 
   if (!open || !data) return null;
 
