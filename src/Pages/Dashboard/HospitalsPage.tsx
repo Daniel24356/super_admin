@@ -44,7 +44,7 @@ const statusOptions = ["All", "Pending", "Approved", "Disapproved"];
 export default function HospitalsPage() {
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
   
   const [activeTab, setActiveTab] = useState("All");
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
@@ -61,7 +61,7 @@ export default function HospitalsPage() {
   const [openDateRange, setOpenDateRange] = useState(false);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchHospitals();
@@ -176,15 +176,10 @@ export default function HospitalsPage() {
     }
   };
 
-  const clearFilters = () => {
-    setSearchQuery("");
-    setStartDate("");
-    setEndDate("");
-    setCurrentPage(1);
-  };
+  // clearFilters removed (not referenced)
 
-  const [removing, setRemoving] = useState(false);
-  const [suspending, setSuspending] = useState(false);
+  const [, setRemoving] = useState(false);
+  const [, setSuspending] = useState(false);
 
   const suspendHospital = async () => {
     if (!driverToSuspend) return;

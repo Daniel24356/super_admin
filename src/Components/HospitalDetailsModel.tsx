@@ -19,7 +19,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
   const [openDisapprove, setOpenDisapprove] = useState(false);
   const [openApprove, setOpenApprove] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [verifyLoading, setVerifyLoading] = useState(false);
+  const [, setVerifyLoading] = useState(false);
   const [localData, setLocalData] = useState<any>(data);
 
   useEffect(() => {

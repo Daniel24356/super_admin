@@ -47,7 +47,7 @@ const statusOptions = ["All", "Pending", "Approved", "Disapproved"];
 export default function AmbulanceOperators() {
   const [operators, setOperators] = useState<Operator[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
   
   const [activeTab, setActiveTab] = useState("All");
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
@@ -64,7 +64,7 @@ export default function AmbulanceOperators() {
   const [openDateRange, setOpenDateRange] = useState(false);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchOperators();
@@ -179,15 +179,10 @@ export default function AmbulanceOperators() {
     }
   };
 
-  const clearFilters = () => {
-    setSearchQuery("");
-    setStartDate("");
-    setEndDate("");
-    setCurrentPage(1);
-  };
+  // clearFilters removed (not referenced)
 
-  const [removing, setRemoving] = useState(false);
-  const [suspending, setSuspending] = useState(false);
+  const [, setRemoving] = useState(false);
+  const [, setSuspending] = useState(false);
 
   const suspendOperator = async () => {
     if (!operatorToSuspend) return;
@@ -210,11 +205,11 @@ export default function AmbulanceOperators() {
       setOperators((prev) =>
         prev.map((o) =>
           o.id === operatorToSuspend.id
-            ? {
+                ? {
                 ...o,
                 suspended: updated?.suspended ?? true,
-                suspensionReason: updated?.suspensionReason ?? o['suspensionReason'] ?? null,
-                suspendedAt: updated?.suspendedAt ?? o['suspendedAt'],
+                suspensionReason: updated?.suspensionReason ?? o.suspensionReason ?? null,
+                suspendedAt: updated?.suspendedAt ?? o.suspendedAt,
               }
             : o
         )
