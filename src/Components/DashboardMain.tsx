@@ -1,9 +1,59 @@
 import { Building2, Users2, Wallet, Activity } from "lucide-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import UsersTable from "./UserTable";
 import { UserDistributionChart } from "./UserDistributionChart";
 import { LiveTrackingMap } from "./LiveTrackingMap";
+import { ApiUrl } from "../api";
+
+interface DashboardMetrics {
+  totalDrivers: number;
+  totalHospitals: number;
+  totalOperators: number;
+  totalIncome: number;
+}
 
 const DashboardMain = () => {
+  const [metrics, setMetrics] = useState<DashboardMetrics>({
+    totalDrivers: 0,
+    totalHospitals: 0,
+    totalOperators: 0,
+    totalIncome: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const response = await axios.get(
+          `${ApiUrl}admin/metrics/summary`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          }
+        );
+        
+        if (response.data.success) {
+          setMetrics(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching metrics:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMetrics();
+  }, []);
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
+  };
+
   return (
     <>
 
@@ -34,7 +84,7 @@ const DashboardMain = () => {
               <Users2 className="w-4 h-4 text-green-600" />
             </div>
             <span className="text-gray-600 text-sm">Total Users</span>
-            <span className="text-2xl font-bold">100</span>
+            <span className="text-2xl font-bold">{loading ? "-" : metrics.totalDrivers}</span>
           </div>
 
           {/* Total Hospitals */}
@@ -43,7 +93,7 @@ const DashboardMain = () => {
               <Building2 className="w-4 h-4 text-orange-500" />
             </div>
             <span className="text-gray-600 text-sm">Total Hospitals</span>
-            <span className="text-2xl font-bold">60</span>
+            <span className="text-2xl font-bold">{loading ? "-" : metrics.totalHospitals}</span>
           </div>
 
           {/* Total Operators */}
@@ -52,7 +102,7 @@ const DashboardMain = () => {
               <Activity className="w-4 h-4 text-blue-500" />
             </div>
             <span className="text-gray-600 text-sm">Total Operators</span>
-            <span className="text-2xl font-bold">30</span>
+            <span className="text-2xl font-bold">{loading ? "-" : metrics.totalOperators}</span>
           </div>
 
           {/* Total Income */}
@@ -61,7 +111,7 @@ const DashboardMain = () => {
               <Wallet className="w-4 h-4 text-green-600" />
             </div>
             <span className="text-gray-600 text-sm">Total Income</span>
-            <span className="text-2xl font-bold">$100,000</span>
+            <span className="text-2xl font-bold">{loading ? "-" : formatCurrency(metrics.totalIncome)}</span>
           </div>
         </div>
 

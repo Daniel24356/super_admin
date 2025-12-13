@@ -1,0 +1,1 @@
+export const ApiUrl = "https://api.abegemspro.com/api/"
