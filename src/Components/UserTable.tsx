@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MoreVertical, Eye, UserMinus, Ban, Search, ChevronDown, Users, X } from "lucide-react";
+import { MoreVertical,Search, ChevronDown, Users, X } from "lucide-react";
 import axios from "axios";
 import { ApiUrl } from "../api";
 
@@ -444,7 +444,7 @@ const UsersTable = () => {
                     </button>
 
                     {/* Dropdown - unchanged */}
-                    {openMenu === index && (
+                    {/* {openMenu === index && (
                       <div className="absolute right-10 top-6 w-44 bg-white shadow-lg rounded-xl border z-20 py-2">
                         <button className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100">
                           <Eye className="w-4 h-4 text-gray-600" /> View Details
@@ -458,7 +458,7 @@ const UsersTable = () => {
                           User
                         </button>
                       </div>
-                    )}
+                    )} */}
                   </td>
                 </tr>
               ))}
