@@ -59,6 +59,14 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
     }
   };
 
+  const handleCloseAll = () => {
+  setShowSuccess(false);
+  setOpenApprove(false);
+  setOpenDisapprove(false);
+  onClose(); // closes HospitalDetailsModal
+};
+
+
   if (!open || !data) return null;
 
   const source = localData || data || {};
@@ -176,7 +184,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
       {/* DISAPPROVE MODAL */}
       <DisapproveModal
         isOpen={openDisapprove}
-        onClose={() => setOpenDisapprove(false)}
+        onClose={handleCloseAll}
         onSubmit={async (reason, message) => {
             console.log("reason:", reason);
             console.log("message:", message);
@@ -187,7 +195,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
 
       <SuccessModal
         open={showSuccess}
-        onClose={() => setShowSuccess(false)}
+        onClose={handleCloseAll}
         icon="😊"
         title="Verification Disapproved"
         message={
@@ -202,7 +210,7 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
 
       <SuccessModal
         open={openApprove}
-        onClose={() => setOpenApprove(false)}
+        onClose={handleCloseAll}
         icon="😁"
         title="Verification Approved"
         message={
