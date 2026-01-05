@@ -74,9 +74,9 @@ export default function HospitalDetailsModal({ open, onClose, data }: Props) {
   const title = isOperator ? "Operator Details" : "Hospital Details";
   const name = source.companyName || source.name || `${source.firstName || ""} ${source.lastName || ""}`.trim();
   const email = source.email || "-";
-  const address = source.companyAddress || source.address || "-";
-  const phone = source.companyPhone || source.phone || "-";
-  const status = source.verifiedStatus || (source.verified ? "Approved" : "Pending");
+  const address = source.address || source.address || "-";
+  const phone = source.contact || source.contact || "-";
+  const status = source.verifiedStatus || (source.verified ? "APPROVED" : "PENDING");
   const roleLabel = isOperator ? "Operator" : "Hospital Admin";
 
   return (

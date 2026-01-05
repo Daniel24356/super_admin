@@ -16,8 +16,8 @@ interface Hospital {
   name?: string;
   organizationName?: string;
   email: string;
-  phone?: string;
-  verified: boolean;
+  contact?: string;
+  hospitalVerified: boolean;
   createdAt: string;
   userType: string;
 }
@@ -106,7 +106,7 @@ export default function HospitalsPage() {
   };
 
   const getHospitalStatus = (hospital: Hospital) => {
-    if (hospital.verified) return "Approved";
+    if (hospital.hospitalVerified) return "Approved";
     return "Pending";
   };
 
@@ -451,7 +451,7 @@ export default function HospitalsPage() {
                   <tr key={hospital.id} className="border-b hover:bg-gray-50 transition">
                     <td className="py-3 px-4 text-[14px]">{getHospitalName(hospital)}</td>
                     <td className="py-3 px-4 text-[14px]">{hospital.email}</td>
-                    <td className="py-3 px-4 text-[14px]">{hospital.phone || "-"}</td>
+                    <td className="py-3 px-4 text-[14px]">{hospital.contact || "-"}</td>
                     <td className="py-3 px-4 text-[14px]">{formatDate(hospital.createdAt)}</td>
                     <td className="px-4 py-4">
                       <span

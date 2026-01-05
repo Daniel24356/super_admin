@@ -18,7 +18,7 @@ interface Operator {
   organizationName?: string;
   email: string;
   phone?: string;
-  verified: boolean;
+  verifiedStatus: boolean;
   suspensionReason?: string | null;
   suspendedAt?: string | null;
   createdAt: string;
@@ -109,7 +109,7 @@ export default function AmbulanceOperators() {
   };
 
   const getOperatorStatus = (operator: Operator) => {
-    if (operator.verified) return "Approved";
+    if (operator.verifiedStatus) return "Approved";
     return "Pending";
   };
 
